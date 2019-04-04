@@ -15,8 +15,8 @@ describe('Authenticate', () => {
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(200)
-            .end((data) => {
-                console.log(data);
+            .end(() => {
+
                 request(app)
                     .post('/authenticate')
                     .set('Accept', 'application/json')
@@ -25,5 +25,18 @@ describe('Authenticate', () => {
                     .expect(200)
                     .end(done);
             });
+    });
+
+    it('should throw error on wrong user or password', done => {
+        request(app)
+            .post('/authenticate')
+            .set('Accept', 'application/json')
+            .send({
+                name: 'wrong_name',
+                password: 'wrong_password'
+            })
+            .expect('Content-Type', /json/)
+            .expect(403)
+            .end(done);
     });
 });

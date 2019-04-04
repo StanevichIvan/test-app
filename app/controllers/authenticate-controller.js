@@ -5,7 +5,6 @@ const jwtSecret = 'secret';
 
 const authenticate = (req, res) => {
     const params = req.body;
-    console.log(params);
 
     User.findOne({
         where: {
@@ -14,13 +13,13 @@ const authenticate = (req, res) => {
         raw: true
     }).then(user => {
         if (!user) {
-            res.send('Authentication failed. User not found.');
+            res.status(403).send({ err: 'Authentication failed. User not found.' });
             return;
         }
 
         bcrypt.compare(params.password, user.password, function(err, isValid) {
             if (err) {
-                res.send('Authentication failed. Wrong password.');
+                res.status(403).send({ err: 'Authentication failed. Wrong password.' });
             }
 
             const payload = {
