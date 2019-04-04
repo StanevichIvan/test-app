@@ -1,0 +1,44 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'run', 'test' ]
+2 info using npm@4.1.2
+3 info using node@v7.5.0
+4 verbose run-script [ 'pretest', 'test', 'posttest' ]
+5 info lifecycle app@0.0.1~pretest: app@0.0.1
+6 silly lifecycle app@0.0.1~pretest: no script for pretest, continuing
+7 info lifecycle app@0.0.1~test: app@0.0.1
+8 verbose lifecycle app@0.0.1~test: unsafe-perm in lifecycle true
+9 verbose lifecycle app@0.0.1~test: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/src/app/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+10 verbose lifecycle app@0.0.1~test: CWD: /src/app
+11 silly lifecycle app@0.0.1~test: Args: [ '-c', 'NODE_ENV=test mocha --exit' ]
+12 info lifecycle app@0.0.1~test: Failed to exec test script
+13 verbose stack Error: app@0.0.1 test: `NODE_ENV=test mocha --exit`
+13 verbose stack spawn ENOENT
+13 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:33:16)
+13 verbose stack     at emitTwo (events.js:106:13)
+13 verbose stack     at ChildProcess.emit (events.js:192:7)
+13 verbose stack     at maybeClose (internal/child_process.js:890:16)
+13 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+14 verbose pkgid app@0.0.1
+15 verbose cwd /src/app
+16 error Linux 4.15.0-47-generic
+17 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "test"
+18 error node v7.5.0
+19 error npm  v4.1.2
+20 error file sh
+21 error code ELIFECYCLE
+22 error errno ENOENT
+23 error syscall spawn
+24 error app@0.0.1 test: `NODE_ENV=test mocha --exit`
+24 error spawn ENOENT
+25 error Failed at the app@0.0.1 test script 'NODE_ENV=test mocha --exit'.
+25 error Make sure you have the latest version of node.js and npm installed.
+25 error If you do, this is most likely a problem with the app package,
+25 error not with npm itself.
+25 error Tell the author that this fails on your system:
+25 error     NODE_ENV=test mocha --exit
+25 error You can get information on how to open an issue for this project with:
+25 error     npm bugs app
+25 error Or if that isn't available, you can get their info via:
+25 error     npm owner ls app
+25 error There is likely additional logging output above.
+26 verbose exit [ 1, true ]

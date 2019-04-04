@@ -1,0 +1,71 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Simple API documentation",
+    "version": "v1"
+  },
+  "paths": {
+    "/user": {
+      "post": {
+        "summary": "Create user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/User"
+              },
+              "example": {
+                "name": "user1",
+                "password": "a123456"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/UserResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": [
+        "name",
+        "password"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "UserResponse": {
+      "properties": {
+        "user": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
