@@ -375,7 +375,7 @@
     },
     "/order": {
       "post": {
-        "summary": "Create user",
+        "summary": "Create order",
         "security": [
           {
             "bearerAuth": []
@@ -386,11 +386,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/User"
+                "$ref": "#/definitions/Order"
               },
               "example": {
-                "name": "user1",
-                "password": "a123456"
+                "title": "New order",
+                "userId": "13"
               }
             }
           }
@@ -401,10 +401,115 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/UserResponse"
+                  "$ref": "#/definitions/Order"
                 }
               }
             }
+          },
+          "403": {
+            "description": "Authentication token required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/AuthErrorResponse"
+                },
+                "example": {
+                  "token": false,
+                  "message": "No token provided."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/order/{id}": {
+      "get": {
+        "summary": "Get order by id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Order"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Authentication token required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/AuthErrorResponse"
+                },
+                "example": {
+                  "token": false,
+                  "message": "No token provided."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Order not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete order by id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order deleted"
+          },
+          "403": {
+            "description": "Authentication token required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/AuthErrorResponse"
+                },
+                "example": {
+                  "token": false,
+                  "message": "No token provided."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Order not found"
           }
         }
       }

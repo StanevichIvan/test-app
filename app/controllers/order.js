@@ -2,7 +2,15 @@ const { Order } = require('../database/sequelize');
 
 const getOrder = (req, res) => {
     const { params } = req;
-    Order.findByPk(params.id).then(users => res.json(users));
+
+    Order.findByPk(params.id).then(order => {
+        if (!order) {
+            res.status(404).send();
+            return;
+        }
+
+        res.send(order);
+    });
 };
 
 const createOrder = (req, res) => {
@@ -15,8 +23,8 @@ const deleteOrderById = (req, res) => {
     const { params } = req;
     Order.findByPk(params.id)
         .then(order => order.destroy())
-        .then(() => res.send({deleted: true}))
-        .catch(err => res.send(err));
+        .then(() => res.status(200).send())
+        .catch(() => res.status(404).send());
 };
 
 module.exports = {
