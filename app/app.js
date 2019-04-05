@@ -19,6 +19,6 @@ app.use('/authenticate', authenticate);
 app.use('/users', userRoutesUnauthorizated);
 app.use(checkAuth);
 app.use('/users', userRoutesAuthorizated);
-app.use('/order', orderRoutes);
+app.use('/orders', orderRoutes);
 
 module.exports = app;

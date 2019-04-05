@@ -13,7 +13,7 @@ describe('Order', () => {
         };
 
         request(app)
-            .post('/user')
+            .post('/users')
             .send(userData)
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
@@ -35,7 +35,7 @@ describe('Order', () => {
     describe('POST', () => {
         it('should create order', done => {
             request(app)
-                .post('/order')
+                .post('/orders')
                 .send({
                     title: 'user\'s order'
                 })
@@ -56,7 +56,7 @@ describe('Order', () => {
     describe('GET', () => {
         it('should return order by id', done => {
             request(app)
-                .get(`/order/${orderId}`)
+                .get(`/orders/${orderId}`)
                 .set('Accept', 'application/json')
                 .set('token', authToken)
                 .expect('Content-Type', /json/)
@@ -68,7 +68,7 @@ describe('Order', () => {
     describe('DELETE', () => {
         it('should delete order by id', done => {
             request(app)
-                .delete(`/order/${orderId}`)
+                .delete(`/orders/${orderId}`)
                 .set('Accept', 'application/json')
                 .set('token', authToken)
                 .expect(200)
