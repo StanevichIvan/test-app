@@ -1,7 +1,7 @@
 const request = require('supertest');
 const app = require('../app');
 
-describe('/user', function () {
+describe('/users', function () {
 
     let authKey;
     let userId = 1;
@@ -13,13 +13,12 @@ describe('/user', function () {
         };
 
         request(app)
-            .post('/user')
+            .post('/users')
             .send(userData)
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(200)
             .end((err, res) => {
-
                 if (res.body.user.id) {
                     userId = res.body.user.id;
                 }
@@ -41,7 +40,7 @@ describe('/user', function () {
     describe('GET', () => {
         it('should respond with json containing a list of all users', done => {
             request(app)
-                .get('/user')
+                .get('/users')
                 .set('Accept', 'application/json')
                 .set('token', authKey)
                 .expect('Content-Type', /json/)
@@ -51,7 +50,7 @@ describe('/user', function () {
 
         it('should return error if auth token doesn\'t exists', done => {
             request(app)
-                .get('/user')
+                .get('/users')
                 .set('Accept', 'application/json')
                 .expect(403)
                 .end(done);
@@ -61,7 +60,7 @@ describe('/user', function () {
     describe('POST', () => {
         it('should create new user', done => {
             request(app)
-                .post('/user')
+                .post('/users')
                 .send({
                     name: 'User1',
                     password: '1324ee'
@@ -70,8 +69,8 @@ describe('/user', function () {
                 .expect('Content-Type', /json/)
                 .expect(200)
                 .end((err, res) => {
-                    if (res.body.user.id) {
-                        userId = res.body.user.id;
+                    if (res.body.id) {
+                        userId = res.body.id;
                     }
 
                     done();
@@ -82,7 +81,7 @@ describe('/user', function () {
     describe('DELETE', () => {
         it('should delete user by id', done => {
             request(app)
-                .delete(`/user/${userId}`)
+                .delete(`/users/${userId}`)
                 .set('Accept', 'application/json')
                 .set('token', authKey)
                 .expect(200)
@@ -91,7 +90,7 @@ describe('/user', function () {
 
         it('should return err if user with id is not found', done => {
             request(app)
-                .delete(`/user/1231234c`)
+                .delete(`/users/1231234c`)
                 .set('Accept', 'application/json')
                 .set('token', authKey)
                 .expect(404)
@@ -110,7 +109,7 @@ describe('/user', function () {
             };
 
             request(app)
-                .post('/user')
+                .post('/users')
                 .send(userData)
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
@@ -133,7 +132,7 @@ describe('/user', function () {
 
         it('should update user ', done => {
             request(app)
-                .put(`/user/${userId}`)
+                .put(`/users/${userId}`)
                 .send({
                     name: 'new name',
                     password: 'new_password'

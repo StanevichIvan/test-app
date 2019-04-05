@@ -16,9 +16,9 @@ app.use(bodyParser.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/authenticate', authenticate);
-app.use('/user', userRoutesUnauthorizated);
+app.use('/users', userRoutesUnauthorizated);
 app.use(checkAuth);
-app.use('/user', userRoutesAuthorizated);
+app.use('/users', userRoutesAuthorizated);
 app.use('/order', orderRoutes);
 
 module.exports = app;

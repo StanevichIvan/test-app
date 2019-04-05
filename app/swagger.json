@@ -36,7 +36,7 @@
         }
       }
     },
-    "/user": {
+    "/users": {
       "post": {
         "summary": "Create user",
         "requestBody": {
@@ -101,7 +101,7 @@
         }
       }
     },
-    "/user/{id}": {
+    "/users/{id}": {
       "get": {
         "summary": "Get user by id",
         "security": [
@@ -254,7 +254,7 @@
         }
       }
     },
-    "/user/{id}/orders": {
+    "/users/{id}/orders": {
       "get": {
         "summary": "Get User's orders",
         "security": [
@@ -309,7 +309,7 @@
         }
       }
     },
-    "/user/{id}/orders/{orderId}": {
+    "/users/{id}/orders/{orderId}": {
       "get": {
         "summary": "Get User's order by id",
         "security": [
