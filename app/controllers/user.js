@@ -72,7 +72,29 @@ const getUserOrders = (req, res) => {
         where: {
             userId: userId
         }
-    }).then(orders => res.send(orders));
+    }).then(orders => {
+        if (!orders.length) {
+            res.status(404).send();
+        }
+        res.send(orders);
+    }).catch(() => res.status(404).send());
+};
+
+const getUserOrdersById = (req, res) => {
+    const { id, orderId } = req.params;
+
+    Order.findAll({
+        attributes: ['id', 'title', 'userId'],
+        where: {
+            userId: id,
+            id: orderId
+        }
+    }).then(orders => {
+        if (!orders.length) {
+            res.status(404).send();
+        }
+        res.send(orders);
+    }).catch(() => res.status(404).send());
 };
 
 module.exports = {
@@ -81,5 +103,6 @@ module.exports = {
     getUserById,
     deleteUserById,
     getUserOrders,
-    updateUser
+    updateUser,
+    getUserOrdersById
 };
