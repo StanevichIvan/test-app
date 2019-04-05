@@ -114,10 +114,7 @@
             "in": "path",
             "name": "id",
             "description": "User id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "required": true
           }
         ],
         "responses": {
@@ -162,10 +159,7 @@
             "in": "path",
             "name": "id",
             "description": "User id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "required": true
           }
         ],
         "requestBody": {
@@ -224,10 +218,7 @@
             "in": "path",
             "name": "id",
             "description": "User id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "required": true
           }
         ],
         "responses": {
@@ -267,10 +258,7 @@
             "in": "path",
             "name": "id",
             "description": "User id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "required": true
           }
         ],
         "responses": {
@@ -322,10 +310,7 @@
             "in": "path",
             "name": "id",
             "description": "User id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "required": true
           },
           {
             "in": "path",
@@ -435,11 +420,8 @@
           {
             "in": "path",
             "name": "id",
-            "description": "User id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "description": "Order id",
+            "required": true
           }
         ],
         "responses": {
@@ -484,10 +466,7 @@
             "in": "path",
             "name": "id",
             "description": "User id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "required": true
           }
         ],
         "responses": {
@@ -525,10 +504,7 @@
             "in": "path",
             "name": "id",
             "description": "Order id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "required": true
           }
         ],
         "requestBody": {
