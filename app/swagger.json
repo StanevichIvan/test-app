@@ -512,6 +512,60 @@
             "description": "Order not found"
           }
         }
+      },
+      "put": {
+        "summary": "Update order label",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Order id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "string"
+              },
+              "example": {
+                "title": "New name"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Order updated"
+          },
+          "403": {
+            "description": "Authentication token required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/AuthErrorResponse"
+                },
+                "example": {
+                  "token": false,
+                  "message": "No token provided."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Order not found"
+          }
+        }
       }
     }
   },

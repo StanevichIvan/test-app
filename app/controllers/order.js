@@ -27,8 +27,27 @@ const deleteOrderById = (req, res) => {
         .catch(() => res.status(404).send());
 };
 
+const updateOrder = (req, res) => {
+    const { params, body } = req;
+
+    Order.findByPk(params.id)
+        .then(order => {
+            if (!order) {
+                res.send(404);
+                return;
+            }
+            return order.update({
+                title: body.title
+            });
+        })
+        .then(order => {
+            res.send(order);
+        });
+};
+
 module.exports = {
     getOrder,
     createOrder,
-    deleteOrderById
+    deleteOrderById,
+    updateOrder
 };
