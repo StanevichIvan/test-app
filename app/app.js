@@ -5,7 +5,7 @@ const userRoutesUnauthorizated = require('./routes/users-unauthorizated');
 const userRoutesAuthorizated = require('./routes/users-authorizated.js');
 const authenticate = require('./routes/authenticate');
 const orderRoutes = require('./routes/order');
-const { checkAuth } = require('./middlewares/middleware');
+const { checkAuth } = require('./middlewares/auth');
 const swaggerDocument = require('./swagger.json');
 
 const app = express();
