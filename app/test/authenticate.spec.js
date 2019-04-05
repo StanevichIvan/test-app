@@ -8,35 +8,36 @@ describe('Authenticate', () => {
         password: '123456'
     };
 
-    it('should return auth token', done => {
-        request(app)
-            .post('/user')
-            .send(userCredentials)
-            .set('Accept', 'application/json')
-            .expect('Content-Type', /json/)
-            .expect(200)
-            .end(() => {
+    describe('POST', () => {
+        it('should return auth token', done => {
+            request(app)
+                .post('/user')
+                .send(userCredentials)
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200)
+                .end(() => {
+                    request(app)
+                        .post('/authenticate')
+                        .set('Accept', 'application/json')
+                        .send(userCredentials)
+                        .expect('Content-Type', /json/)
+                        .expect(200)
+                        .end(done);
+                });
+        });
 
-                request(app)
-                    .post('/authenticate')
-                    .set('Accept', 'application/json')
-                    .send(userCredentials)
-                    .expect('Content-Type', /json/)
-                    .expect(200)
-                    .end(done);
-            });
-    });
-
-    it('should throw error on wrong user or password', done => {
-        request(app)
-            .post('/authenticate')
-            .set('Accept', 'application/json')
-            .send({
-                name: 'wrong_name',
-                password: 'wrong_password'
-            })
-            .expect('Content-Type', /json/)
-            .expect(403)
-            .end(done);
+        it('should throw error on wrong user or password', done => {
+            request(app)
+                .post('/authenticate')
+                .set('Accept', 'application/json')
+                .send({
+                    name: 'wrong_name',
+                    password: 'wrong_password'
+                })
+                .expect('Content-Type', /json/)
+                .expect(403)
+                .end(done);
+        });
     });
 });

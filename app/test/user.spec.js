@@ -3,7 +3,7 @@ const app = require('../app');
 
 describe('/user', function () {
 
-    const authKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlcjEiLCJpZCI6MSwidGltZSI6IjIwMTktMDQtMDNUMTQ6NTA6MTAuMDg5WiIsImlhdCI6MTU1NDMwMzAxMCwiZXhwIjoxNTU0Mzk5MDEwfQ.3btGIGxtSAm1B7mwFoo9Q5xWx5p1TnKcOOfDYEyKAqE';
+    const authKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlcjEiLCJpZCI6MTMsInRpbWUiOiIyMDE5LTA0LTA1VDA2OjE5OjI3LjI1MVoiLCJpYXQiOjE1NTQ0NDUxNjcsImV4cCI6MTU1NDU0MTE2N30.Uhj_Bfzg8z-couuMTf3eaabtnQrReqS5Xa2z408j72w';
     let userId = 1;
 
     describe('GET', () => {
@@ -68,34 +68,49 @@ describe('/user', function () {
     });
 
     describe('UPDATE', () => {
-        it('should update user ', done  => {
-            let userId;
+        let authKey;
+        let userId;
+
+        beforeEach(done => {
+            const userData = {
+                name: 'user',
+                password: 'password'
+            };
 
             request(app)
                 .post('/user')
-                .send({
-                    name: 'User1',
-                    password: '1324ee'
-                })
+                .send(userData)
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
                 .expect(200)
                 .end((err, res) => {
-                    if (res.body.user.id) {
-                        userId = res.body.user.id;
-                    }
+                    userId = res.body.user.id;
 
                     request(app)
-                        .put(`/user/${userId}`)
-                        .send({
-                            name: 'new name',
-                            password: 'new_password'
-                        })
+                        .post('/authenticate')
                         .set('Accept', 'application/json')
-                        .set('token', authKey)
+                        .send(userData)
+                        .expect('Content-Type', /json/)
                         .expect(200)
-                        .end(done);
+                        .end((err, res) => {
+                            authKey = res.body.token;
+                            done();
+                        });
                 });
+        });
+
+        it('should update user ', done => {
+            request(app)
+                .put(`/user/${userId}`)
+                .send({
+                    name: 'new name',
+                    password: 'new_password'
+                })
+                .set('Accept', 'application/json')
+                .set('token', authKey)
+                .expect(200)
+                .end(done);
+
         });
     });
 });
