@@ -37,13 +37,13 @@ const deleteUserById = (req, res) => {
     User.findByPk(params.id)
         .then(user => {
             if (user) {
-                user.destroy();
+                return user.destroy();
             } else {
                 throw new Error();
             }
         })
-        .then(user => {
-            res.send(user);
+        .then(() => {
+            res.status(200).send();
         })
         .catch(() => res.status(404).send({ err: 'user not found'}));
 };
@@ -65,9 +65,10 @@ const updateUser = (req, res) => {
 };
 
 const getUserOrders = (req, res) => {
-    const userId = req.user.id;
+    const userId = req.params.id;
 
     Order.findAll({
+        attributes: ['id', 'title', 'userId'],
         where: {
             userId: userId
         }
