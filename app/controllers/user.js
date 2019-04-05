@@ -1,4 +1,5 @@
 const { User, Order } = require('../database/sequelize');
+const { updateUserViewModel } = require('../view-models/user');
 
 const getAllUsers = (req, res) => {
     User.findAll().then(users => res.json(users));
@@ -20,6 +21,9 @@ const getUserById = (req, res) => {
 
     User.findByPk(params.id)
         .then(user => {
+            if (!user) {
+                res.status(404);
+            }
             res.send(user);
         })
         .catch(err => {
@@ -56,7 +60,7 @@ const updateUser = (req, res) => {
             return user.update(body);
         })
         .then(user => {
-            res.send(user);
+            res.send(updateUserViewModel(user));
         });
 };
 
