@@ -131,6 +131,20 @@
               }
             }
           },
+          "403": {
+            "description": "Authentication token required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/AuthErrorResponse"
+                },
+                "example": {
+                  "token": false,
+                  "message": "No token provided."
+                }
+              }
+            }
+          },
           "404": {
             "description": "User not found"
           }
@@ -178,6 +192,183 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Authentication token required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/AuthErrorResponse"
+                },
+                "example": {
+                  "token": false,
+                  "message": "No token provided."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete user by id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User deleted"
+          },
+          "403": {
+            "description": "Authentication token required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/AuthErrorResponse"
+                },
+                "example": {
+                  "token": false,
+                  "message": "No token provided."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/user/{id}/orders": {
+      "get": {
+        "summary": "Get User's orders",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Orders retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Order"
+                },
+                "example": [{
+                  "id": 1,
+                  "title": "user's order",
+                  "userId": 13
+                }]
+              }
+            }
+          },
+          "403": {
+            "description": "Authentication token required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/AuthErrorResponse"
+                },
+                "example": {
+                  "token": false,
+                  "message": "No token provided."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Orders not found"
+          }
+        }
+      }
+    },
+    "/user/{id}/orders/{orderId}": {
+      "get": {
+        "summary": "Get User's order by id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "orderId",
+            "description": "Order id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Orders retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Order"
+                },
+                "example": [{
+                  "id": 1,
+                  "title": "user's order",
+                  "userId": 13
+                }]
+              }
+            }
+          },
+          "403": {
+            "description": "Authentication token required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/AuthErrorResponse"
+                },
+                "example": {
+                  "token": false,
+                  "message": "No token provided."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Orders not found"
           }
         }
       }
@@ -282,6 +473,19 @@
           "type": "string"
         },
         "message": {
+          "type": "string"
+        }
+      }
+    },
+    "Order": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "userId": {
           "type": "string"
         }
       }
