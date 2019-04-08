@@ -8,6 +8,31 @@
     "/authenticate": {
       "post": {
         "summary": "Get JWT token",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "The user to create.",
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "password"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -39,6 +64,28 @@
     "/users": {
       "post": {
         "summary": "Create user",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "The user to create.",
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "password"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -109,14 +156,6 @@
             "bearerAuth": []
           }
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "User id",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "User found",
@@ -156,10 +195,24 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "description": "User id",
-            "required": true
+            "in": "body",
+            "name": "user",
+            "description": "The user to update.",
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "password"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
           }
         ],
         "requestBody": {
@@ -213,14 +266,6 @@
             "bearerAuth": []
           }
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "User id",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "User deleted"
@@ -253,14 +298,6 @@
             "bearerAuth": []
           }
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "User id",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "Orders retrieved",
@@ -269,11 +306,13 @@
                 "schema": {
                   "$ref": "#/definitions/Order"
                 },
-                "example": [{
-                  "id": 1,
-                  "title": "user's order",
-                  "userId": 13
-                }]
+                "example": [
+                  {
+                    "id": 1,
+                    "title": "user's order",
+                    "userId": 13
+                  }
+                ]
               }
             }
           },
@@ -305,23 +344,6 @@
             "bearerAuth": []
           }
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "User id",
-            "required": true
-          },
-          {
-            "in": "path",
-            "name": "orderId",
-            "description": "Order id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Orders retrieved",
@@ -330,11 +352,13 @@
                 "schema": {
                   "$ref": "#/definitions/Order"
                 },
-                "example": [{
-                  "id": 1,
-                  "title": "user's order",
-                  "userId": 13
-                }]
+                "example": [
+                  {
+                    "id": 1,
+                    "title": "user's order",
+                    "userId": 13
+                  }
+                ]
               }
             }
           },
@@ -364,6 +388,28 @@
         "security": [
           {
             "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Order",
+            "description": "New order",
+            "schema": {
+              "type": "object",
+              "required": [
+                "title",
+                "userId"
+              ],
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "userId": {
+                  "type": "string"
+                }
+              }
+            }
           }
         ],
         "requestBody": {
@@ -416,14 +462,6 @@
             "bearerAuth": []
           }
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "Order id",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "Order retrieved",
@@ -461,14 +499,6 @@
             "bearerAuth": []
           }
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "User id",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "Order deleted"
@@ -501,10 +531,20 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "description": "Order id",
-            "required": true
+            "in": "body",
+            "name": "Order",
+            "description": "The order to update.",
+            "schema": {
+              "type": "object",
+              "required": [
+                "title"
+              ],
+              "properties": {
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
           }
         ],
         "requestBody": {

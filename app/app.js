@@ -8,7 +8,8 @@ const userOrders = require('./routes/user-orders');
 const authenticate = require('./routes/authenticate');
 const orderRoutes = require('./routes/order');
 const { checkAuth } = require('./middlewares/auth');
-const swaggerValidator = require('./middlewares/swagger-validator');
+const swaggerValidator = require('./middlewares/swagger/validator');
+const swaggerRequestInterceptor = require('./middlewares/swagger/request-interceptor');
 const swaggerDocument = require('./swagger.json');
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(swaggerValidator);
+app.use(swaggerRequestInterceptor);
 app.use('/authenticate', authenticate);
 app.use('/users', userRoutesUnauthorizated);
 app.use(checkAuth);
