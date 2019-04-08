@@ -1,5 +1,6 @@
 const { User, Order } = require('../database/sequelize');
 const { userViewMapper } = require('../mappers/user');
+const errorMessages = require('../contants/error-message');
 
 const getAllUsers = (req, res) => {
     User.findAll().then(users => res.json(users));
@@ -45,7 +46,7 @@ const deleteUserById = (req, res) => {
         .then(() => {
             res.status(200).send();
         })
-        .catch(() => res.status(404).send({ err: 'user not found'}));
+        .catch(() => res.status(404).send({ err: errorMessages.NOT_FOUND}));
 };
 
 const updateUser = (req, res) => {
