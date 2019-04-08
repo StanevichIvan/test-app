@@ -1,4 +1,4 @@
-const updateUserViewModel = (userModel) => {
+const userViewMapper = (userModel) => {
     return {
         name: userModel.name,
         id: userModel.id
@@ -6,5 +6,5 @@ const updateUserViewModel = (userModel) => {
 };
 
 module.exports = {
-    updateUserViewModel
+    userViewMapper
 };

@@ -1,5 +1,5 @@
 const { User, Order } = require('../database/sequelize');
-const { updateUserViewModel } = require('../view-models/user');
+const { userViewMapper } = require('../mappers/user');
 
 const getAllUsers = (req, res) => {
     User.findAll().then(users => res.json(users));
@@ -60,7 +60,7 @@ const updateUser = (req, res) => {
             return user.update(body);
         })
         .then(user => {
-            res.send(updateUserViewModel(user));
+            res.send(userViewMapper(user));
         });
 };
 
