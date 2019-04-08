@@ -21,7 +21,8 @@
     "jsonwebtoken": "^8.5.1",
     "swagger-ui-express": "^4.0.2",
     "swagger-express-validator": "^0.1.1",
-    "util": "^0.11.1"
+    "util": "^0.11.1",
+    "dotenv": "^7.0.0"
   },
   "devDependencies": {
     "mocha": "^6.0.2",

@@ -1,14 +1,13 @@
 const Sequelize = require('sequelize');
-const config = require('../config');
 const UserModel = require('../models/user');
 const OrderModel = require('../models/order');
 const BookModel = require('../models/book');
 const BookAuthorModel = require('../models/book-author');
 
-const sequelize = new Sequelize('postgres', 'postgres', 'postgres', {
+const sequelize = new Sequelize(process.env.PG_DB_NAME, process.env.PG_DB_USER, process.env.PG_DB_PASSWORD, {
     dialect: 'postgres',
-    host: config.host,
-    port: config.db_port,
+    host: process.env.PG_DB_HOST,
+    port: process.env.PG_DB_PORT,
 });
 
 const User = UserModel(sequelize, Sequelize);

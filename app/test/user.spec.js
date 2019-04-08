@@ -90,7 +90,7 @@ describe('/users', function () {
 
         it('should return err if user with id is not found', done => {
             request(app)
-                .delete(`/users/1231234c`)
+                .delete(`/users/1231234`)
                 .set('Accept', 'application/json')
                 .set('token', authKey)
                 .expect(404)
