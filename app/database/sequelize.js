@@ -17,8 +17,8 @@ User.hasMany(Order);
 const Book = BookModel(sequelize, Sequelize);
 const BookAuthor = BookAuthorModel(sequelize, Sequelize);
 
-Book.belongsToMany(BookAuthor, {through: 'book_users', unique: false});
-BookAuthor.belongsToMany(Book, {through: 'book_users', unique: false});
+Book.belongsToMany(BookAuthor, {through: 'books_authors', unique: false});
+BookAuthor.belongsToMany(Book, {through: 'books_authors', unique: false});
 Book.belongsTo(Order);
 
 const sequelizeConfig = { force: false };
